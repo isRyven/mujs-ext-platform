@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.12)
+project(qsortx LANGUAGES C)
+add_library(qsortx_h INTERFACE)
+target_include_directories(qsortx_h INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+add_library(qsortx OBJECT qsortx.c include/qsortx/qsortx.h)
+target_link_libraries(qsortx qsortx_h)

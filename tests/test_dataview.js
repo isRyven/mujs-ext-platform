@@ -1,0 +1,67 @@
+function assert(t, m) { if (!t) throw new Error(m); }
+function except(f, m) { try { f() } catch (e) { return; }; throw new Error(m); }
+
+var ab = new ArrayBuffer(8);
+var dv = new DataView(ab);
+assert(dv.buffer === ab);
+var dv = new DataView(ab, 4);
+var dv = new DataView(ab, 4, 4);
+var dv = new DataView(ab, 2);
+assert(dv.byteOffset === 2);
+assert(dv.byteLength === 6);
+except(function() { new DataView({}); });
+except(function() { new DataView(ab, 10); });
+except(function() { new DataView(ab, 4, 10); });
+except(function() { DataView(ab); });
+var dv = new DataView(ab, 4);
+dv.byteOffset = 0;
+assert(dv.byteOffset === 4);
+dv.byteLength = 10;
+assert(dv.byteLength === 4);
+dv.buffer = null;
+assert(dv.buffer === ab);
+/* test value setter/getter methods existence */
+assert(dv.setInt8);
+assert(dv.setUint8);
+assert(dv.setInt16);
+assert(dv.setUint16);
+assert(dv.setInt32);
+assert(dv.setUint32);
+assert(dv.setFloat32);
+assert(dv.setFloat64);
+assert(dv.getInt8);
+assert(dv.getUint8);
+assert(dv.getInt16);
+assert(dv.getUint16);
+assert(dv.getInt32);
+assert(dv.getUint32);
+assert(dv.getFloat32);
+assert(dv.getFloat64);
+var ab = new ArrayBuffer(8);
+var dv = new DataView(ab);
+dv.setInt8(4, -128);
+assert(dv.getInt8(4) === -128);
+dv.setUint8(4, 128);
+assert(dv.getUint8(4) === 128);
+dv.setInt16(4, -1024);
+assert(dv.getInt16(4) === -1024);
+dv.setUint16(4, 1024);
+assert(dv.getUint16(4) === 1024);
+dv.setInt32(4, -192168);
+assert(dv.getInt32(4) === -192168);
+dv.setUint32(4, 192168);
+assert(dv.getUint32(4) === 192168);
+dv.setFloat32(4, 192168);
+assert(dv.getFloat32(4) === 192168);
+dv.setFloat64(0, 192168);
+assert(dv.getFloat64(0) === 192168);
+except(function() { dv.setInt32(6, 13); });
+except(function() { dv.setInt32(-1, 13); });
+except(function() { dv.setInt32(-1); });
+except(function() { dv.setFloat64(4); });
+/* test endianess */
+dv.setUint32(0, 0xFFFFFF00);
+assert(dv.getUint32(0, true) === 0x00FFFFFF);
+dv.setUint32(0, 0x00FFFFFF, true);
+assert(dv.getUint32(0) === 0xFFFFFF00);
+except(function() { new DataView(undefined); });
