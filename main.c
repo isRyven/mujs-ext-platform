@@ -6,7 +6,6 @@
 #include "jsB_typedarray.h"
 #include "jsB_dataview.h"
 #include "jsB_libstd.h"
-#include "jsB_http.h"
 #include "jsB_eventloop.h"
 #include "jsB_vm.h"
 #include "jsB_module.h"

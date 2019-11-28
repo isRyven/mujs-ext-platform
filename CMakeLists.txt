@@ -20,8 +20,6 @@ add_library(serve_jsb STATIC
 	jsB_eventloop.h
 	jsB_eventemitter.h
 	jsB_eventemitter.c
-	jsB_http.c
-	jsB_http.h
 	jsB_tcp.c
 	jsB_tcp.h
 	jsB_vm.h
