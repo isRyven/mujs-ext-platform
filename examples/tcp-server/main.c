@@ -14,7 +14,7 @@
 #include "jsB_timers.h"
 #include "tests/t_utils.h"
 
-extern const unsigned char bootstrap_js[];
+extern const unsigned char server_js[];
 
 /* accepts in directory path */
 int main(int argc, const char **argv)
@@ -96,7 +96,7 @@ int main(int argc, const char **argv)
 		js_setlength(J, -1, (argc - 1));
 	js_setproperty(J, -2, "scriptArgs");
 
-	js_loadstringE(J, "server.js", (const char*)bootstrap_js);
+	js_loadstringE(J, "server.js", (const char*)server_js);
 	js_pushundefined(J);
 	js_call(J, 0);
 
